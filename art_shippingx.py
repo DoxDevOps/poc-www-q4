@@ -28,9 +28,9 @@ def alert(url, params):
     return r
 
 
-recipients = ["+265998006237", "+265991450316", "+265995246144", "+265992182669", "+265884195606", "+265995532195"] 
+recipients = ["+265998006237", "+265991450316", "+265995246144", "+265994427700", "+265992600883", "+265999679975", "+265999611280"] 
 
-cluster = get_xi_data('http://10.44.0.52/sites/api/v1/get_single_cluster/33')
+cluster = get_xi_data('http://10.44.0.52/sites/api/v1/get_single_cluster/5')
 
 for site_id in cluster['site']:
     site = get_xi_data('http://10.44.0.52/sites/api/v1/get_single_site/' + str(site_id))
@@ -58,7 +58,7 @@ for site_id in cluster['site']:
 
             version = msg.format(result).strip()
 
-            api_version = "v4.13.1"
+            api_version = "v4.13.3"
 
             if api_version == version:
                 msgx = "Hi there,\n\nDeployment of ART to " + version + " for " + site[
@@ -84,7 +84,7 @@ for site_id in cluster['site']:
             # make sure we are sending the alert at the last pint attempt
             if count == 3:
                 for recipient in recipients:
-                    msg = "Hi there,\n\nDeployment of ART to v4.13.1 for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF HIS."
+                    msg = "Hi there,\n\nDeployment of ART to v4.13.3 for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF HIS."
                     params = {
                         "api_key": os.getenv('API_KEY'),
                         "recipient": recipient,
