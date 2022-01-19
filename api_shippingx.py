@@ -28,9 +28,9 @@ def alert(url, params):
     r = requests.post(url, json=params, headers=headers)
     return r
 
-recipients = ["+265995246144"]
+recipients = ["+265995246144", "+265991450316", "+265998006237", "+265999959499", "+265995628519", "+265881262319", "+265992268777", "+265993030442", "+265882233319"]
 
-cluster = get_xi_data('http://10.44.0.52/sites/api/v1/get_single_cluster/1')
+cluster = get_xi_data('http://10.44.0.52/sites/api/v1/get_single_cluster/18')
 
 for site_id in cluster['site']:
     site = get_xi_data('http://10.44.0.52/sites/api/v1/get_single_site/' + str(site_id))
@@ -67,7 +67,7 @@ for site_id in cluster['site']:
             
             version = msg.format(result).strip()
             
-            api_version = "v4.14.1-beta"
+            api_version = "v4.14.2"
             
             if api_version == version:
                 msgx = "Hi there,\n\nDeployment of API to " + version + " for " + site['name'] + " completed succesfully.\n\nThanks!\nEGPAF HIS."
@@ -94,7 +94,7 @@ for site_id in cluster['site']:
             # make sure we are sending the alert at the last pint attempt
             if count == 3:
                 for recipient in recipients:
-                    msg = "Hi there,\n\nDeployment of API to V4.14.1-beta for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF HIS."
+                    msg = "Hi there,\n\nDeployment of API to V4.14.2 for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF HIS."
                     params = {
                         "api_key": os.getenv('API_KEY'),
                         "recipient": recipient,
